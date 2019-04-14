@@ -1,0 +1,25 @@
+In JSF 2.0, it’s recommended to create a JSF page in XHTML file format, a file with a .xhtml extension.
+
+Note:
+To use the JSF 2.0 components or features, just declared the JSF namespace at the top of the page.
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+//------------------------------------------------------------------
+faces-config.xml:
+In JSF 1.x, you had to declare beans in the faces-config.xml, but this is no longer required in JSF 2.0.
+
+In JSF 1.x, you had to declare the “navigation rule” in “faces-config.xml“, to tell which page to display
+when the button is clicked. In JSF 2.0, you can put the page name directly in the button’s “action” attribute.
+For simple navigation, it’s more than enough, but, for complex navigation, you are still advised to
+use the “navigation rule” in “faces-config.xml“.
+
+//////////////////////////////////////////////////////////////////////
+to access:
+http://[ip]:[jboss port]/[war file name]/
+http://192.168.0.88:8081/JSF/
+
+---------------------------------------------------------------------
+@named bean gives null pointer at injection point
+https://stackoverflow.com/a/30128396/3593084

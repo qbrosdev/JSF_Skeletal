@@ -1,0 +1,24 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:remove>
+
+    <script type="text/javascript">
+        $(document).ready(setInterval(function() {
+            var date = new Date().toLocaleString();
+            updateTheme(date);
+        },'50000'));
+    </script>
+    <pe:remoteCommand name="updateTheme"
+                      process="@this"
+                      update="growl"
+                      actionListener="#{appHandler.synchTheme}">
+        <pe:methodSignature parameters="java.lang.String"/>
+        <pe:methodParam name="date"/>
+    </pe:remoteCommand>
+    </ui:remove>
+
+</ui:composition>

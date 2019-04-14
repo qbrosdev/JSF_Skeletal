@@ -1,0 +1,137 @@
+<!--Just like any other standard web frameworks, you are required to configure JSF stuffs in web.xml file.-->
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <session-config>
+        <session-timeout>1</session-timeout>
+        <!--prevent session hijacking: medium.freecodecamp.org/session-hijacking-and-how-to-stop-it-711e3683d1ac
+        these configs only apply to session cookie (JSESSION_ID)-->
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure>
+            <!--Instead, make sure the JSESSIONID is stored in a cookie if tracking-mode is set to COOKIE. -->
+            <!--The valid values for tracing-mode are COOKIE/SSL/URL-->
+            <!--<trcking-mode></trcking-mode>-->
+        </cookie-config>
+    </session-config>
+
+    <!-- Force SSL for entire site -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Entire Application</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <!--If you want to turn off the SSL, you don’t need to delete the code above from web.xml,
+        simply change CONFIDENTIAL to NONE.-->
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <!-- Welcome page A welcome file is the file that is invoked automatically by the server, if you don't specify any file name.
+        By default server looks for the welcome file in following order:
+        welcome-file-list in web.xml
+        index.html
+        index.htm
+        index.jsp
+        https://www.javatpoint.com/welcome-file-list
+        NOTE: if you add several entries in this list server would search from the beginning of the list and if it finds
+        a match it will stop searching-->
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <!-- Change to "Production" when you are ready to deploy -->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+
+    <!--https://stackoverflow.com/questions/3500738/invisible-comments-in-jsf-2-0-->
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+
+    <!--- Shiro setting  -->
+    <listener>
+        <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+    </listener>
+    <filter>
+        <filter-name>ShiroFilter</filter-name>
+        <filter-class>com.qbros.Domain.Shiro.Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ShiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+
+    <!--info primefaces dynamic theme-->
+    <!--https://www.mkyong.com/jsf2/primefaces/changing-theme-in-primefaces/-->
+    <!--https://stackoverflow.com/questions/28392888/init-param-and-context-param-->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>#{appHandler.appThemeName}</param-value>
+    </context-param>
+
+
+
+    <!--JSF error pages-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/app/error/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/app/error/404.html</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/app/error/expired.xhtml</location>
+    </error-page>
+
+    <!-- JSF mapping -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--INFO Map these files with JSF Define a “javax.faces.webapp.FacesServlet” mapping, and map to those well-known
+    JSF file extensions (/faces/*, *.jsf, *.xhtml,*.faces).-->
+    <!--INFO In this case, the below 4 URLs are pointing to the same login2.xhtml.-->
+    <!--http://localhost:8080/JavaServerFaces/hello.jsf-->
+    <!--http://localhost:8080/JavaServerFaces/hello.faces-->
+    <!--http://localhost:8080/JavaServerFaces/login2.xhtml-->
+    <!--http://localhost:8080/JavaServerFaces/faces/hello.jsf-->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
+    <!--https://stackoverflow.com/questions/14984154/warning-jsf1091-no-mime-type-could-be-found-for-file-dynamiccontent/20163409-->
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+</web-app>

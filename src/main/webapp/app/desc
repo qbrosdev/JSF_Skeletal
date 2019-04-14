@@ -1,0 +1,7 @@
+https://www.mkyong.com/jsf2/jsf-2-templating-with-facelets-example/
+
+
+ui:insert – Used in template file, it defines content that is going to replace by the file that load the template. The content can be replace with “ui:define” tag.
+ui:define – Defines content that is inserted into template with a matching “ui:insert” tag.
+ui:include – Similar to JSP’s “jsp:include”, includes content from another XHTML page.
+ui:composition – If used with “template” attribute, the specified template is loaded, and the children of this tag defines the template layout; Otherwise, it’s a group of elements, that can be inserted somewhere. In addition, JSF removes all tags “outside” of “ui:composition” tag.

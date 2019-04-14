@@ -1,0 +1,26 @@
+setting dynamic thems on prime
+https://stackoverflow.com/questions/4935496/how-to-set-a-primefaces-theme
+
+problem on importing prime Themes
+https://stackoverflow.com/questions/21705509/jars-are-missing-on-artifactory-server-after-installing-primefaces-all-themes/36167184#36167184
+
+what is ca and ssl
+https://stackoverflow.com/questions/47506517/how-can-i-add-a-certificate-to-liclipse-to-permit-access-to-a-git-repo-via-ssl
+
+add ca root to java
+https://knowledge.digicert.com/solution/SO4085.html
+
+add ca root to java (example)
+https://docs.microsoft.com/en-us/java/azure/java-sdk-add-certificate-ca-store?view=azure-java-stable
+
+add keytool in cmd commands
+https://bytutorial.com/blogs/cordova/keytool-is-not-recognized-as-an-internal-or-external-command-operable-program-or-batch-file
+
+.pem vs .cr
+https://stackoverflow.com/questions/22743415/what-are-the-differences-between-pem-cer-and-der
+
+to import cert you need to run cmd in admin mode
+https://stackoverflow.com/questions/10321211/java-keytool-error-after-importing-certificate-keytool-error-java-io-filenot
+
+list all the installed certs
+https://knowledge.digicert.com/solution/SO15504.html

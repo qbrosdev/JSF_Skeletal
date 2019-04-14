@@ -1,0 +1,23 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+        <!--https://stackoverflow.com/questions/6993329/jsf-2-prime-faces-navigation-using-menu-and-panels-->
+        <!--NOTE: reference from root: https://stackoverflow.com/a/12150063/3593084-->
+        <h3>Toggleable</h3>
+        <p:menu toggleable="true">
+            <p:submenu label="Ajax">
+                <p:menuitem value="Save" actionListener="#{menuHandler.save}" ajax="true"  icon="pi pi-save" />
+                <p:menuitem value="Update" actionListener="#{menuHandler.update}"  icon="pi pi-refresh"/>
+            </p:submenu>
+            <p:submenu label="Non-Ajax">
+                <p:menuitem value="Delete" actionListener="#{menuHandler.delete}" ajax="false" icon="pi pi-times"/>
+            </p:submenu>
+            <p:submenu label="Navigations">
+                <p:menuitem value="External" url="http://www.primefaces.org" icon="pi pi-home"/>
+                <p:menuitem value="Internal" icon="pi pi-star"/>
+            </p:submenu>
+        </p:menu>
+
+</ui:composition>

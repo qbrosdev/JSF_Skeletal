@@ -1,0 +1,6 @@
+In case of Maven, it should be in /main/webapp/resources and thus not /main/resources (those are for Java resources (properties/xml/text/config files) which must end up in runtime classpath, not in webcontent).
+
+https://stackoverflow.com/a/8368727/3593084
+
+//---------------------passinf attrivute to back bean using an action method
+https://stackoverflow.com/questions/14474484/jsf-core-tag-setpropertyactionlistener-vs-attribute-vs-param

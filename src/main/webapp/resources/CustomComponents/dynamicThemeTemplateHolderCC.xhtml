@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<composite:interface componentType="dynamicTheme">
+    <composite:attribute name = "intervalTimeMilliSec" type="java.lang.Integer" default="1000" shortDescription="......"/>
+    <composite:attribute name = "templatePath" required="true" shortDescription="......"/>
+    <composite:attribute name = "themeChangerBean" required="true" type="com.qbros.Domain.ThemeChanger"  shortDescription="......"/>
+    <composite:attribute name = "themeDefault"  shortDescription="......"/>
+    <composite:attribute name = "themeMorning" required="true" shortDescription="......"/>
+    <composite:attribute name = "themeAfternoon" required="true" shortDescription="......"/>
+    <composite:attribute name = "themeNight" required="true" shortDescription="......"/>
+</composite:interface>
+
+<composite:implementation>
+
+
+    <!--https://stackoverflow.com/questions/8367421/how-to-reference-css-js-image-resource-in-facelets-template-->
+    <!--<h:outputStylesheet id="rootCss" library="css" name="css/{cc.currentThemeName}"/>-->
+    <!--<link id="test" rel="stylesheet" href="/JSF/resources/css/{cc.currentThemeName}" type="text/css"/>-->
+
+    <h:form>
+        <p:growl id="growl"  sticky="true"  globalOnly="true"/>
+        <!--https://www.primefaces.org/showcase-ext/sections/remoteCommand/methodParam.jsf-->
+        <!--https://www.logicbig.com/tutorials/misc/primefaces/remote-command.html-->
+        <!--https://stackoverflow.com/questions/2547814/mixing-jsf-el-in-a-javascript-file-->
+        <script type="text/javascript">
+            $(document).ready(setInterval(function() {
+                var date = new Date().toLocaleString();
+                updateTheme(date);
+            },'#{cc.attrs.intervalTimeMilliSec}'));
+        </script>
+        <!--https://www.mkyong.com/jsf2/4-ways-to-pass-parameter-from-jsf-page-to-backing-bean/-->
+        <pe:remoteCommand name="updateTheme"
+                          process="@this"
+                          update="growl"
+                          actionListener="#{cc.synchTheme}">
+            <pe:methodSignature parameters="java.lang.String"/>
+            <pe:methodParam name="date"/>
+        </pe:remoteCommand>
+    </h:form>
+
+    <ui:include src="#{cc.attrs.templatePath}"/>
+</composite:implementation>
+
+</html>

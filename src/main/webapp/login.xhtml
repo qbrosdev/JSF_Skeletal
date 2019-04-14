@@ -1,0 +1,13 @@
+<ui:composition template="/app/login/template/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:cc="http://java.sun.com/jsf/composite/CustomComponents">
+
+    <ui:define name="mainContent">
+            <cc:loginCC backBean="#{loginService}"/>
+            <!--info command button navigation-->
+            <!--the command button will post the form data and does not navigate to new page-->
+            <!--https://stackoverflow.com/questions/15521451/how-to-navigate-in-jsf-how-to-make-url-reflect-current-page-and-not-previous-o-->
+            <!--<h:commandButton value="Welcome Me"  action="welcome"/>-->
+    </ui:define>
+</ui:composition>

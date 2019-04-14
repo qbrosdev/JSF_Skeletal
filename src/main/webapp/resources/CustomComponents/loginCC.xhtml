@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite" >
+
+<!--info how to create composite-->
+<!--Create a .xhtml file, and declared the composite namespace.xmlns:composite="http://java.sun.com/jsf/composite"-->
+<!--Uses composite tags composite:interface,composite:attribute and composite:implementation, to define content
+of the composite component.you can access composite:interface attribute with the expression {cc.attrs.attributeName}.-->
+
+<composite:interface>
+    <composite:attribute name = "backBean" required="true" shortDescription="......"/>
+</composite:interface>
+
+<composite:implementation>
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel for="usernameid" value="Username:" />
+        <p:inputText id="usernameid" value="#{cc.attrs.backBean.user}" required="true" label="username" />
+
+        <h:outputLabel for="passwordid" value="Password:" />
+        <p:password id="passwordid" value="#{cc.attrs.backBean.pass}" required="true" label="password" />
+
+        <h:outputLabel for="rememberMe" value="Remember Me:" />
+        <h:selectBooleanCheckbox id="rememberMe" value="#{cc.attrs.backBean.rememberMe}" />
+        <h:panelGroup />
+
+        <f:facet name="footer">
+            <!--outcome vs action  https://stackoverflow.com/questions/15035232/jsf-action-vs-outcome-attribute-->
+            <p:commandButton value="Login" action="#{cc.attrs.backBean.loginRedirect}" update="" />
+        </f:facet>
+    </h:panelGrid>
+</composite:implementation>
+
+</html>
